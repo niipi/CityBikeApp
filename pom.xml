@@ -110,6 +110,26 @@
 					</execution>
 
 					<execution>
+						<id>install-mui</id>
+						<goals>
+							<goal>yarn</goal>
+						</goals>
+						<configuration>
+							<arguments>add @mui/material @emotion/react @emotion/styled </arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>add-mui-datagrid</id>
+						<goals>
+							<goal>yarn</goal>
+						</goals>
+						<configuration>
+							<arguments>add @mui/x-data-grid </arguments>
+						</configuration>
+					</execution>
+
+					<execution>
 						<id>build-frontend</id>
 						<goals>
 							<goal>yarn</goal>
@@ -119,6 +139,7 @@
 							<arguments>build</arguments>
 						</configuration>
 					</execution>
+
 				</executions>
 			</plugin>
 			<plugin>

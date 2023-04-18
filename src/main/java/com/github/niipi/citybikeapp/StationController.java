@@ -22,7 +22,7 @@ public class StationController {
     @Autowired
     private StationRepository repository;
 
-    @GetMapping("/stations")
+    @GetMapping("/all")
     public Map<String, Object> getAllStations(
             @RequestParam(value = "name", required = false)
             String stationName,
