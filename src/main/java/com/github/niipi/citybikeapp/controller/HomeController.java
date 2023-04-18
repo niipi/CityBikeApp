@@ -1,4 +1,4 @@
-package com.github.niipi.citybikeapp;
+package com.github.niipi.citybikeapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
