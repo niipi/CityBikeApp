@@ -20,9 +20,9 @@ console.log(station)
 
 const columns = [
   { field: 'stationId', headerName: 'ID', width: 70 },
-  { field: 'stationName', headerName: 'Name', width: 130 },
+  { field: 'stationName', headerName: 'Name', width: 150 },
   { field: 'stationAddress', headerName: 'Address', width: 200 },
-  { field: 'stationCity', headerName: 'City', width: 70 },
+  { field: 'stationCity', headerName: 'City', width: 100 },
   { field: 'serviceProvider', headerName: 'Service provider', width: 130},
   {
     field: 'capacity',
@@ -33,7 +33,7 @@ const columns = [
 ];
 
   return (
-    <div style={{ height: 400, width: "80%" }}>
+    <div style={{ height: 500, width: "60%" }}>
      <h1>City Bike Stations</h1>
       <DataGrid
         paginationMode="server"

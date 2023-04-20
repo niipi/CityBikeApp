@@ -124,5 +124,17 @@ public class Station {
         this.longitude = longitude;
     }
 
-
+    @Override
+    public String toString() {
+        return "Station{" +
+                "stationId=" + stationId +
+                ", stationName='" + stationName + '\'' +
+                ", stationAddress='" + stationAddress + '\'' +
+                ", stationCity='" + stationCity + '\'' +
+                ", serviceProvider='" + serviceProvider + '\'' +
+                ", capacity=" + capacity +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

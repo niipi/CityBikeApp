@@ -7,25 +7,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/stations")
 public class StationController {
 
     @Autowired
     private StationRepository repository;
 
+    public StationController(StationRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping("/all")
-    public Map<String, Object> getAllStations(
+    public ResponseEntity<Map<String, Object>> getAllStations(
             @RequestParam(value = "name", required = false)
             String stationName,
             @RequestParam(value = "address", required = false)
@@ -54,10 +61,15 @@ public class StationController {
             Map<String, Object> response = new HashMap<String, Object>();
             response.put("stations", stations);
             response.put("totalPages", stationPage.getTotalPages());
-            return response;
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(response);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            Map<String, Object> emptyResponse = new HashMap<String, Object>();
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(emptyResponse);
         }
     }
 }
