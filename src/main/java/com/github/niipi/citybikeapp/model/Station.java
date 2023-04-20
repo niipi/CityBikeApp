@@ -1,9 +1,6 @@
-package com.github.niipi.citybikeapp;
+package com.github.niipi.citybikeapp.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 /** Class for generating station objects based on information from the PostGreSQL database table "stations". **/

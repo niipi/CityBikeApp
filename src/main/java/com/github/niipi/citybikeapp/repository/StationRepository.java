@@ -1,7 +1,6 @@
 package com.github.niipi.citybikeapp.repository;
 
-import com.github.niipi.citybikeapp.Station;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.niipi.citybikeapp.model.Station;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Page;

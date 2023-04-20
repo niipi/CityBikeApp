@@ -1,7 +1,7 @@
 package com.github.niipi.citybikeapp.controller;
 
 
-import com.github.niipi.citybikeapp.Station;
+import com.github.niipi.citybikeapp.model.Station;
 import com.github.niipi.citybikeapp.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

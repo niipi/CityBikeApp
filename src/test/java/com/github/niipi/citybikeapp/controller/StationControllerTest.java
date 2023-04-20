@@ -1,6 +1,6 @@
 package com.github.niipi.citybikeapp.controller;
 
-import com.github.niipi.citybikeapp.Station;
+import com.github.niipi.citybikeapp.model.Station;
 import com.github.niipi.citybikeapp.repository.StationRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
