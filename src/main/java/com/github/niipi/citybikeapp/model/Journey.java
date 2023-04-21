@@ -10,7 +10,7 @@ public class Journey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int journeyId;
+    private Long journeyId;
 
     @Column(name = "departure")
     @Temporal(TemporalType.TIMESTAMP)
@@ -21,13 +21,13 @@ public class Journey {
     private LocalDateTime returnTime;
 
     @Column(name = "departure_station_id")
-    private int departureStationId;
+    private Long departureStationId;
 
     @Column(name = "departure_station_name")
     private String departureStationName;
 
     @Column(name = "return_station_id")
-    private int returnStationId;
+    private Long returnStationId;
 
     @Column(name = "return_station_name")
     private String returnStationName;
@@ -42,8 +42,8 @@ public class Journey {
         // empty constructor
     }
 
-    public Journey(LocalDateTime departureTime, LocalDateTime returnTime, int departureStationId, String departureStationName,
-                   int returnStationId, String returnStationName, int distance, int duration) {
+    public Journey(LocalDateTime departureTime, LocalDateTime returnTime, Long departureStationId, String departureStationName,
+                   Long returnStationId, String returnStationName, int distance, int duration) {
         this.departureTime = departureTime;
         this.returnTime = returnTime;
         this.departureStationId = departureStationId;
@@ -52,6 +52,14 @@ public class Journey {
         this.returnStationName = returnStationName;
         this.distance = distance;
         this.duration = duration;
+    }
+
+    public Long getJourneyId() {
+        return journeyId;
+    }
+
+    public void setJourneyId(Long journeyId) {
+        this.journeyId = journeyId;
     }
 
     public LocalDateTime getDepartureTime() {
@@ -70,11 +78,11 @@ public class Journey {
         this.returnTime = returnTime;
     }
 
-    public int getDepartureStationId() {
+    public Long getDepartureStationId() {
         return departureStationId;
     }
 
-    public void setDepartureStationId(int departureStationId) {
+    public void setDepartureStationId(Long departureStationId) {
         this.departureStationId = departureStationId;
     }
 
@@ -86,11 +94,11 @@ public class Journey {
         this.departureStationName = departureStationName;
     }
 
-    public int getReturnStationId() {
+    public Long getReturnStationId() {
         return returnStationId;
     }
 
-    public void setReturnStationId(int returnStationId) {
+    public void setReturnStationId(Long returnStationId) {
         this.returnStationId = returnStationId;
     }
 

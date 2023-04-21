@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JourneyRepository extends JpaRepository<Journey, Integer> {
 
-    Page<Journey> findByDepartureStationId(int departureStationId, Pageable pageable);
+    Page<Journey> findByDepartureStationId(Long departureStationId, Pageable pageable);
 
-    Page<Journey> findByReturnStationId(int returnStationId, Pageable pageable);
+    Page<Journey> findByReturnStationId(Long returnStationId, Pageable pageable);
+
+    Page<Journey> findByDepartureStationIdAndReturnStationId(Long departureStationId, Long returnStationId, Pageable pageable);
 
 }
