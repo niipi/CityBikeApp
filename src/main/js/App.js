@@ -1,12 +1,11 @@
 import './App.css';
-import StationDataGrid from './Stations.js';
-import JourneyDataGrid from './Journeys';
+import ToggleButtons from './ToggleStationsJourneys';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <JourneyDataGrid/>
+        <ToggleButtons/>
       </header>
     </div>
   );

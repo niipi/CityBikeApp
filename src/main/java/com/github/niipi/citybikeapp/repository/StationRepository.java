@@ -13,4 +13,5 @@ public interface StationRepository extends JpaRepository<Station, Integer> {
     Page<Station> findByStationAddress(String stationAddress, Pageable pageable);
 
     Page<Station> findByStationNameAndStationAddress(String stationName, String stationAddress, Pageable pageable);
+
 }
