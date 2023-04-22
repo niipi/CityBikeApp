@@ -41,16 +41,17 @@ public class StationController {
                 LOG.debug("/stations/all has been called. Parametres: " + stationName + stationAddress);
             }
             List<Station> stations = new ArrayList<Station>();
-            // TODO: check page and size
+            page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
+            size = makeGivenParameterAcceptable(size);
             Pageable pageable = PageRequest.of(page, size);
             Page<Station> stationPage;
             if (stationName == null && stationAddress == null) {
                 stationPage = repository.findAll(pageable);
             }
-            else if (stationName == null) {
+            else if (stationName == null && stationAddress != null) {
                 stationPage = repository.findByStationAddress(stationAddress, pageable);
             }
-            else if (stationAddress == null) {
+            else if (stationAddress == null && stationName != null) {
                 stationPage = repository.findByStationName(stationName, pageable);
             }
             else {
@@ -71,4 +72,23 @@ public class StationController {
                     .body(emptyResponse);
         }
     }
+
+    private int makeGivenParameterAcceptable(int parameter) {
+        return makeGivenParameterAcceptable(parameter, 100);
+    }
+
+    private int makeGivenParameterAcceptable(int parameter, int maxValue) {
+        int acceptableParameter;
+        if (parameter < 0) {
+            acceptableParameter = 0;
+        }
+        else if (parameter > maxValue) {
+            acceptableParameter = 100;
+        }
+        else {
+            acceptableParameter = parameter;
+        }
+        return acceptableParameter;
+    }
+
 }

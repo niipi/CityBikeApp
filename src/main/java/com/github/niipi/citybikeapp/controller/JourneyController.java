@@ -41,7 +41,8 @@ public class JourneyController {
                 LOG.debug("/journeys/all has been called. Parametres: " + departureStationId + returnStationId);
             }
             List<Journey> journeys = new ArrayList<Journey>();
-            // TODO: check page and size
+            page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
+            size = makeGivenParameterAcceptable(size);
             Pageable pageable = PageRequest.of(page, size);
             Page<Journey> journeyPage;
             if (departureStationId != null && returnStationId != null) {
@@ -71,4 +72,23 @@ public class JourneyController {
                     .body(emptyResponse);
         }
     }
+
+    private int makeGivenParameterAcceptable(int parameter) {
+        return makeGivenParameterAcceptable(parameter, 100);
+    }
+
+    private int makeGivenParameterAcceptable(int parameter, int maxValue) {
+        int acceptableParameter;
+        if (parameter < 0) {
+            acceptableParameter = 0;
+        }
+        else if (parameter > maxValue) {
+            acceptableParameter = 100;
+        }
+        else {
+            acceptableParameter = parameter;
+        }
+        return acceptableParameter;
+    }
+
 }
