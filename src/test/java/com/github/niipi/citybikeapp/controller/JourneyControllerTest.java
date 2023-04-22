@@ -1,8 +1,8 @@
 package com.github.niipi.citybikeapp.controller;
 
 import com.github.niipi.citybikeapp.CitybikeApplication;
-import com.github.niipi.citybikeapp.model.Station;
-import com.github.niipi.citybikeapp.repository.StationRepository;
+import com.github.niipi.citybikeapp.model.Journey;
+import com.github.niipi.citybikeapp.repository.JourneyRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -24,46 +25,40 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 @ContextConfiguration(classes= CitybikeApplication.class)
 @AutoConfigureMockMvc
-class StationControllerTest {
+@RunWith(SpringRunner.class)
+class JourneyControllerTest {
 
     private MockMvc mockMvc;
 
     @Autowired
-    private StationRepository repository;
+    private JourneyRepository repository;
 
-    private Station testStation1 = new Station(001, "Testiasema1", "Testikuja 15", "Vantaa", "CityBike Finland", 35, 22.4556, 33.5678);
-    private Station testStation2 = new Station(002, "Teststation2", "Testpromenad 7", "Espoo", "CityBike Finland", 44, 11.3466, 33.6785);
+    private Journey testJourney1 = new Journey(LocalDateTime.of(2021, 5, 31, 23, 52, 3), LocalDateTime.of(2021, 6 , 1, 01,06,23), Long.parseLong("501"), "Hanasaari", Long.parseLong("502"), "Kulosaari", 6785, 345);
 
-    /** Populates test station repository with test stations provided. **/
     @BeforeEach
     void setUp(WebApplicationContext webApplicationContext) {
-        repository.save(testStation1);
-        repository.save(testStation2);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(new StationController(repository)).build();
+        repository.save(testJourney1);
+        this.mockMvc = MockMvcBuilders.standaloneSetup(new JourneyController(repository)).build();
     }
 
-    /** Compares values from test station repository get response to expected values. **/
     @Test
-    void shouldReturnAllStationsAsJSON() throws Exception {
-        ArrayList<Station> expectedStations = new ArrayList<>();
-        expectedStations.add(testStation1);
-        expectedStations.add(testStation2);
+    void shouldReturnAllJourneysAsJSON() throws Exception {
+        ArrayList<Journey> expectedJourneys = new ArrayList<Journey>();
+        expectedJourneys.add(testJourney1);
         int expectedTotalPages = 1;
         this.mockMvc
-                .perform(get("/stations/all"))
+                .perform(get("/journeys/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(jsonPath("$.stations", hasSize(expectedStations.size())))
+                .andExpect(jsonPath("$.journeys", hasSize(expectedJourneys.size())))
                 .andExpect(jsonPath("$.totalPages", is(expectedTotalPages)))
-                .andExpect(jsonPath("$.stations[0].stationId", is(expectedStations.get(0).getStationId())))
-                .andExpect(jsonPath("$.stations[1].stationId", is(expectedStations.get(1).getStationId())));
+                .andExpect(jsonPath("$.journeys[0].departureStationId", is(Integer.parseInt(Long.toString(expectedJourneys.get(0).getDepartureStationId())))));
     }
 
     @AfterEach

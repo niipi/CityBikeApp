@@ -37,6 +37,7 @@ public class JourneyController {
             int size) {
         try {
             List<Journey> journeys = new ArrayList<Journey>();
+            // TODO: check page and size
             Pageable pageable = PageRequest.of(page, size);
             Page<Journey> journeyPage;
             if (departureStationId != null && returnStationId != null) {
@@ -59,6 +60,7 @@ public class JourneyController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(response);
         } catch (Exception e) {
+            // TODO: add logging framework
             e.printStackTrace();
             Map<String, Object> emptyResponse = new HashMap<String, Object>();
             return ResponseEntity.ok()

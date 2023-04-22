@@ -43,6 +43,7 @@ public class StationController {
             int size) {
         try {
             List<Station> stations = new ArrayList<Station>();
+            // TODO: check page and size
             Pageable pageable = PageRequest.of(page, size);
             Page<Station> stationPage;
             if (stationName == null && stationAddress == null) {
@@ -65,6 +66,7 @@ public class StationController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(response);
         } catch (Exception e) {
+            // TODO: add logging framework
             e.printStackTrace();
             Map<String, Object> emptyResponse = new HashMap<String, Object>();
             return ResponseEntity.ok()
