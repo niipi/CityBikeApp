@@ -1,28 +1,23 @@
 package com.github.niipi.citybikeapp.controller;
 
-
 import com.github.niipi.citybikeapp.model.Station;
 import com.github.niipi.citybikeapp.repository.StationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/stations")
 public class StationController {
+
+    private final static Logger LOG = LoggerFactory.getLogger(StationController.class);
 
     @Autowired
     private StationRepository repository;
@@ -42,6 +37,9 @@ public class StationController {
             @RequestParam(value = "size", defaultValue = "10")
             int size) {
         try {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("/stations/all has been called. Parametres: " + stationName + stationAddress);
+            }
             List<Station> stations = new ArrayList<Station>();
             // TODO: check page and size
             Pageable pageable = PageRequest.of(page, size);
@@ -66,8 +64,7 @@ public class StationController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(response);
         } catch (Exception e) {
-            // TODO: add logging framework
-            e.printStackTrace();
+            LOG.error("An exception occurred.", e);
             Map<String, Object> emptyResponse = new HashMap<String, Object>();
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)

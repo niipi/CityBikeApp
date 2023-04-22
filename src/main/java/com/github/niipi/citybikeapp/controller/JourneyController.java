@@ -2,11 +2,10 @@ package com.github.niipi.citybikeapp.controller;
 
 import com.github.niipi.citybikeapp.model.Journey;
 import com.github.niipi.citybikeapp.repository.JourneyRepository;
-import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,8 @@ import java.util.*;
 @Controller
 @RequestMapping("/journeys")
 public class JourneyController {
+
+    private final static Logger LOG = LoggerFactory.getLogger(JourneyController.class);
 
     @Autowired
     private JourneyRepository repository;
@@ -36,6 +37,9 @@ public class JourneyController {
             @RequestParam(value = "size", defaultValue = "10")
             int size) {
         try {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("/journeys/all has been called. Parametres: " + departureStationId + returnStationId);
+            }
             List<Journey> journeys = new ArrayList<Journey>();
             // TODO: check page and size
             Pageable pageable = PageRequest.of(page, size);
@@ -60,8 +64,7 @@ public class JourneyController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(response);
         } catch (Exception e) {
-            // TODO: add logging framework
-            e.printStackTrace();
+            LOG.error("An exception occurred.", e);
             Map<String, Object> emptyResponse = new HashMap<String, Object>();
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
