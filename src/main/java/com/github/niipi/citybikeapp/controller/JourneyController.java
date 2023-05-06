@@ -43,6 +43,7 @@ public class JourneyController {
             List<Journey> journeys = new ArrayList<Journey>();
             page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
             size = makeGivenParameterAcceptable(size);
+            // TODO: validate string parameters
             Pageable pageable = PageRequest.of(page, size);
             Page<Journey> journeyPage;
             if (departureStationId != null && returnStationId != null) {

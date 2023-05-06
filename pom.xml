@@ -95,6 +95,7 @@
 					<yarnVersion>${yarn.version}</yarnVersion>
 					<workingDirectory>${frontend-src-dir}</workingDirectory>
 					<installDirectory>${project.build.directory}</installDirectory>
+					<arguments>--env.production=false</arguments>
 				</configuration>
 
 				<executions>
@@ -111,7 +112,7 @@
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>install</arguments>
+							<arguments>install </arguments>
 						</configuration>
 					</execution>
 
@@ -121,17 +122,7 @@
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>add @mui/material @emotion/react @emotion/styled </arguments>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>add-mui-datagrid</id>
-						<goals>
-							<goal>yarn</goal>
-						</goals>
-						<configuration>
-							<arguments>add @mui/x-data-grid </arguments>
+							<arguments>add @mui/core @mui/system  @mui/icons-material @mui/material @emotion/react @emotion/styled @mui/x-data-grid </arguments>
 						</configuration>
 					</execution>
 
@@ -142,7 +133,7 @@
 						</goals>
 						<phase>prepare-package</phase>
 						<configuration>
-							<arguments>build</arguments>
+							<arguments>build --source-map</arguments>
 						</configuration>
 					</execution>
 

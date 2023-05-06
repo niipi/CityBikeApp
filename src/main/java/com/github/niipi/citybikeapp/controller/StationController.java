@@ -43,6 +43,7 @@ public class StationController {
             List<Station> stations = new ArrayList<Station>();
             page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
             size = makeGivenParameterAcceptable(size);
+            // TODO: validate string parameters
             Pageable pageable = PageRequest.of(page, size);
             Page<Station> stationPage;
             if (stationName == null && stationAddress == null) {

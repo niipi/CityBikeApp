@@ -1,22 +1,27 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 
-export default function StationDataGrid() {
-    const[ station, setStation ] = useState({totalPages: 0, stations: []});
-    const [paginationModel, setPaginationModel] = useState({
+export default function StationDataGrid({onRowSelect}) {
+    const[ station, setStation ] = React.useState({totalPages: 0, stations: []});
+    const [ paginationModel, setPaginationModel ] = React.useState({
       pageSize: 10,
       page: 0,
-    });
+    }); 
 
-
-useEffect(()=> {
+React.useEffect(()=> {
         fetch(`http://localhost:8080/stations/all?page=${paginationModel.page}`)
         .then((data) => data.json())
         .then((data) => setStation(data))
 },[paginationModel]);
 
-console.log(station)
+console.log(station.stations);
+
+function handleRowClick(selectedStation) {
+  console.log("Valittu asema on ", selectedStation);
+  console.log("Aseman nimi: ", selectedStation.stationName);
+  onRowSelect(selectedStation);
+}
 
 const columns = [
   { field: 'stationId', headerName: 'ID', width: 70 },
@@ -32,6 +37,7 @@ const columns = [
   },
 ];
 
+
   return (
     <div style={{ height: 500, width: "60%" }}>
      <h1>City Bike Stations</h1>
@@ -39,11 +45,14 @@ const columns = [
         paginationMode="server"
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
+        disableMultipleRowSelection={true}
+        onRowClick={(params) => handleRowClick(params.row)}
         rowCount={station.totalPages*10}
         getRowId={(stations) => stations.stationId}
         rows={station.stations}
         columns={columns}
       />
+  
     </div>
   );
 }

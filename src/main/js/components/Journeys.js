@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 
 export default function JourneyDataGrid() {
-    const[ journey, setJourney ] = useState({totalPages: 0, journeys: []});
-    const [ paginationModel, setPaginationModel ] = useState({
+    const[ journey, setJourney ] = React.useState({totalPages: 0, journeys: []});
+    const [ paginationModel, setPaginationModel ] = React.useState({
       pageSize: 10,
       page: 0,
     });
 
 
-useEffect(()=> {
+React.useEffect(()=> {
         fetch(`http://localhost:8080/journeys/all?page=${paginationModel.page}`)
         .then((data) => data.json())
         .then((data) => setJourney(data))
