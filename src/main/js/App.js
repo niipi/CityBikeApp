@@ -10,19 +10,16 @@ function App() {
   const [selectedStation, setSelectedStation] = React.useState(null);
   
   function handleRowSelect(selectedStation) {
-    console.log("App.js käsittelee klikkausta");
     setSelectedStation(selectedStation);
-    console.log("Valittu asema on ", selectedStation);
-    console.log("App.js toimittaa SingleStationPagelle aseman ", selectedStation.stationName, " tiedot");
   }
 
 return (
   <div className="App">
     <header className="App-header">
-      <BikeAppBar/>
+      <BikeAppBar />
+      <div className='Content'>,
       {(selectedStation ? (
-        [
-          <Button variant="contained"
+        [ <Button variant="contained"
           onClick={()=>{
             setSelectedStation(null);
           }}>Back to stations</Button>,
@@ -32,6 +29,7 @@ return (
            <StationDataGrid onRowSelect={handleRowSelect}/>
         )
       )}
+      </div>
 </header>
 </div>
 );

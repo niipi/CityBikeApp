@@ -39,7 +39,7 @@ const columns = [
 
 
   return (
-    <div style={{ height: 500, width: "60%" }}>
+    <div className='Content'>
      <h1>City Bike Stations</h1>
       <DataGrid
         paginationMode="server"

@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function BikeAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 100 ,  width: "100%"}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
