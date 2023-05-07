@@ -17,7 +17,7 @@ return (
   <div className="App">
     <header className="App-header">
       <BikeAppBar />
-      <div className='Content'>,
+      <div className='Content'>
       {(selectedStation ? (
         [ <Button variant="contained"
           onClick={()=>{

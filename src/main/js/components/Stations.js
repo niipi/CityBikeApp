@@ -15,11 +15,7 @@ React.useEffect(()=> {
         .then((data) => setStation(data))
 },[paginationModel]);
 
-console.log(station.stations);
-
 function handleRowClick(selectedStation) {
-  console.log("Valittu asema on ", selectedStation);
-  console.log("Aseman nimi: ", selectedStation.stationName);
   onRowSelect(selectedStation);
 }
 
@@ -41,6 +37,7 @@ const columns = [
   return (
     <div className='Content'>
      <h1>City Bike Stations</h1>
+     <p>Select a station to view its details</p>
       <DataGrid
         paginationMode="server"
         paginationModel={paginationModel}

@@ -1,12 +1,14 @@
 import React from "react";
+import JourneyDataGrid from "./Journeys";
 
 
 function SingleStationPage(station) {
     const selection = station.station;
 
     return (
-            [<h3>This is the station page for {selection.stationName}</h3>,
-            <p>Address: {selection.stationAddress}</p>]
+            [<h2> {selection.stationName}</h2>,
+            <p>Address: {selection.stationAddress}</p>,
+            <JourneyDataGrid selectedStationId={selection.stationId}/>]
     );
 }
 
