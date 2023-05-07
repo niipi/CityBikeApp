@@ -115,7 +115,15 @@
 							<arguments>install </arguments>
 						</configuration>
 					</execution>
-
+					<execution>
+						<id>install-react-leaflet</id>
+						<goals>
+							<goal>yarn</goal>
+						</goals>
+						<configuration>
+							<arguments>add leaflet react-leaflet </arguments>
+						</configuration>
+					</execution>
 					<execution>
 						<id>install-mui</id>
 						<goals>

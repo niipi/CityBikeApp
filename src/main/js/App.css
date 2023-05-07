@@ -21,3 +21,10 @@
 .App-link {
   color: #61dafb;
 }
+
+.leaflet-container {
+  width: 250px;
+  height: 250px;
+  align: center;
+  padding: 10px;
+}

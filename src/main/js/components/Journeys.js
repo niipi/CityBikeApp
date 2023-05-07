@@ -27,7 +27,7 @@ const columns = [
 
   return (
     [
-     <h3>Journeys departing</h3>,
+     <h3>Journeys</h3>,
       <DataGrid
         paginationMode="server"
         paginationModel={paginationModel}
