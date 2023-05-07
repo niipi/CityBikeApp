@@ -7,11 +7,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 export default function BikeAppBar() {
+  
   return (
     <Box sx={{ flexGrow: 100 ,  width: "100%"}}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+{/*           <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -19,7 +20,7 @@ export default function BikeAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Helsinki City Bike Information
           </Typography>
