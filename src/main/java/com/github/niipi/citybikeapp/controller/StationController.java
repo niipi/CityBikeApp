@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.InvalidParameterException;
 import java.util.*;
 
 @Controller
@@ -36,6 +37,7 @@ public class StationController {
             int page,
             @RequestParam(value = "size", defaultValue = "10")
             int size) {
+
         try {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("/stations/all has been called. Parametres: " + stationName + stationAddress);
@@ -43,16 +45,18 @@ public class StationController {
             List<Station> stations = new ArrayList<Station>();
             page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
             size = makeGivenParameterAcceptable(size);
-            // TODO: validate string parameters
             Pageable pageable = PageRequest.of(page, size);
             Page<Station> stationPage;
+
             if (stationName == null && stationAddress == null) {
                 stationPage = repository.findAll(pageable);
             }
             else if (stationName == null && stationAddress != null) {
+                stringParameterIsValid("stationAddress", stationAddress);
                 stationPage = repository.findByStationAddress(stationAddress, pageable);
             }
             else if (stationAddress == null && stationName != null) {
+                stringParameterIsValid("stationName", stationName);
                 stationPage = repository.findByStationName(stationName, pageable);
             }
             else {
@@ -92,4 +96,11 @@ public class StationController {
         return acceptableParameter;
     }
 
+    private void stringParameterIsValid(String parameterName, String parameterValue) {
+        // Acceptable string patterns contain alphanumeric characters, - and parentheses, and are between 1-256 characters long
+        String pattern = "^[a-zA-Z0-9() åäöÅÄÖ-]{1,255}$";
+        if (!parameterValue.matches(pattern)) {
+            throw new InvalidParameterException("Invalid parameter for station request was given: " + parameterName + " = " + parameterValue);
+        }
+    }
 }
