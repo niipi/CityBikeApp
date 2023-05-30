@@ -2,20 +2,18 @@ import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 
-export default function JourneyDataGrid(selectedStationId) {
+export default function JourneyDataGrid({returningOrDeparting, selectedStationId}) {
     const[ journey, setJourney ] = React.useState({totalPages: 0, journeys: []});
     const [ paginationModel, setPaginationModel ] = React.useState({
       pageSize: 10,
       page: 0,
     });
 
-const id = selectedStationId.selectedStationId;
-
 React.useEffect(()=> {
-        fetch(`http://localhost:8080/journeys/all?departureStationId=${id}`)
+        fetch(`http://localhost:8080/journeys/all?${returningOrDeparting}StationId=${selectedStationId}`)
         .then((data) => data.json())
         .then((data) => setJourney(data))
-},[paginationModel]);
+},[returningOrDeparting, paginationModel]);
 
 const columns = [
   { field: 'journeyId', headerName: 'Journey ID', width: 100 },

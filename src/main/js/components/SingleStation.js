@@ -1,6 +1,6 @@
 import React from "react";
 import JourneyDataGrid from "./Journeys";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from "@mui/material";
 import Map from "./Map";
 
 function SingleStationPage(station) {
@@ -11,7 +11,12 @@ function SingleStationPage(station) {
         longitude: selection.latitude
     };
 
-    // Radio buttons for toggling returning and departing journeys to be added
+    // Event handler for toggling between returning and departing journeys of the station being viewed
+    const [value, setValue] = React.useState("departure"); // Set to departing journeys by default
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    }
+
     return (
             [<h2> {selection.stationName}</h2>,
             <Paper>
@@ -23,8 +28,19 @@ function SingleStationPage(station) {
                                 City Bike Service Provider: {selection.serviceProvider}<br/>
                                 Capacity: {selection.capacity}<br/>
                                 <p><br/>
-                                radio button: show departing journeys<br/>
-                                radio button: show returning journeys
+                                <FormControl>
+                                    <FormLabel id="demo-controlled-radio-buttons-group">Toggle journey direction</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-controlled-radio-buttons-group"
+                                        name="controlled-radio-buttons-group"
+                                        value={value}
+                                        onChange={handleChange}
+                                    >
+                                        <FormControlLabel value="departure" control={<Radio />} label="Departing" />
+                                        <FormControlLabel value="return" control={<Radio />} label="Returning" />
+                                    </RadioGroup>
+                                </FormControl>
                                 </p>
                             </Typography>
                         </Box>
@@ -36,7 +52,7 @@ function SingleStationPage(station) {
                     </Grid>
                 </Grid>
             </Paper>,
-            <JourneyDataGrid selectedStationId={selection.stationId}/>]
+            <JourneyDataGrid returningOrDeparting={value} selectedStationId={selection.stationId}/>]
     );
 }
 
