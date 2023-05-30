@@ -39,7 +39,7 @@ function SingleStationPage(station) {
             [<h2> {selection.stationName}</h2>,
             <Paper>
                 <Grid container spacing={2}>
-                    <Grid item xs={8}>
+                    <Grid item xs={6}>
                         <Box p={3}>
                             <Typography align="justify">
                                 Address: {selection.stationAddress}, {selection.stationCity}<br/>
@@ -49,10 +49,10 @@ function SingleStationPage(station) {
                                 Returning journeys: {returnJourneyCount.countJourneys}<br/>
                                 <p><br/>
                                 <FormControl>
-                                    <FormLabel id="demo-controlled-radio-buttons-group">Toggle journey direction</FormLabel>
+                                    <FormLabel id="controlled-radio-buttons-group">Toggle journey direction</FormLabel>
                                     <RadioGroup
                                         row
-                                        aria-labelledby="demo-controlled-radio-buttons-group"
+                                        aria-labelledby="controlled-radio-buttons-group"
                                         name="controlled-radio-buttons-group"
                                         value={value}
                                         onChange={handleChange}
@@ -65,8 +65,8 @@ function SingleStationPage(station) {
                             </Typography>
                         </Box>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Box>
+                    <Grid item xs={2}>
+                        <Box p={3}>
                             <Map coords={coords} display_name={selection.stationName}/>
                         </Box>
                     </Grid>
