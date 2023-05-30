@@ -36,7 +36,7 @@ const columns = [
 
   return (
     <div className='Content'>
-     <h1>City Bike Stations</h1>
+     <h2>Stations</h2>
      <p>Select a station to view its details</p>
       <DataGrid
         paginationMode="server"
