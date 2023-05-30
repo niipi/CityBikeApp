@@ -32,8 +32,6 @@ public class Station {
    @Column(name = "y")
    private double longitude;
 
-   // TODO: add a list reference to related Journeys
-
    public Station() {
        // empty constructor
    }

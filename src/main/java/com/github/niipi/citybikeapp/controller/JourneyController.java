@@ -74,6 +74,35 @@ public class JourneyController {
         }
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Map<String, Long>> countJourneys(
+            @RequestParam(value = "departureStationId", required = false)
+            Long departureStationId,
+            @RequestParam(value = "returnStationId", required = false)
+            Long returnStationId) {
+            Long countJourneys = 0l;
+        try {
+            if (departureStationId != null && returnStationId == null) {
+                countJourneys = repository.countByDepartureStationId(departureStationId);
+            } else if (departureStationId == null && returnStationId != null) {
+                countJourneys = repository.countByReturnStationId(returnStationId);
+            } else {
+                countJourneys = repository.count();
+            }
+            Map<String, Long> response = new HashMap<>();
+            response.put("countJourneys", countJourneys);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(response);
+        } catch (Exception e) {
+            LOG.error("An exeption occurred.", e);
+            Map<String, Long> emptyResponse = new HashMap<String, Long>();
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(emptyResponse);
+        }
+    }
+
     private int makeGivenParameterAcceptable(int parameter) {
         return makeGivenParameterAcceptable(parameter, 100);
     }

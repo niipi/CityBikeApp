@@ -5,11 +5,29 @@ import Map from "./Map";
 
 function SingleStationPage(station) {
     const selection = station.station;
+
+    // Props for Map component
     const coords = {
         // Longitude and latitude were mixed up by developer, to be fixed
         latitude: selection.longitude,
         longitude: selection.latitude
     };
+
+    // Fetch journey counts from backend
+    const [departureJourneyCount, setDepartureJourneyCount] = React.useState(0);
+    const [returnJourneyCount, setReturnJourneyCount] = React.useState(0);
+
+    React.useEffect(() => {
+        fetch(`http://localhost:8080/journeys/count?departureStationId=${selection.stationId}`)
+        .then((data) => data.json())
+        .then((data) => setDepartureJourneyCount(data));
+    }, [selection.stationId]);
+
+    React.useEffect(() => {
+        fetch(`http://localhost:8080/journeys/count?returnStationId=${selection.stationId}`)
+        .then((data) => data.json())
+        .then((data) => setReturnJourneyCount(data));
+    }, [selection.stationId]);
 
     // Event handler for toggling between returning and departing journeys of the station being viewed
     const [value, setValue] = React.useState("departure"); // Set to departing journeys by default
@@ -27,6 +45,8 @@ function SingleStationPage(station) {
                                 Address: {selection.stationAddress}, {selection.stationCity}<br/>
                                 City Bike Service Provider: {selection.serviceProvider}<br/>
                                 Capacity: {selection.capacity}<br/>
+                                Departing journeys: {departureJourneyCount.countJourneys}<br/>
+                                Returning journeys: {returnJourneyCount.countJourneys}<br/>
                                 <p><br/>
                                 <FormControl>
                                     <FormLabel id="demo-controlled-radio-buttons-group">Toggle journey direction</FormLabel>

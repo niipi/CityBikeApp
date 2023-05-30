@@ -14,4 +14,8 @@ public interface JourneyRepository extends JpaRepository<Journey, Integer> {
 
     Page<Journey> findByDepartureStationIdAndReturnStationId(Long departureStationId, Long returnStationId, Pageable pageable);
 
+    long countByDepartureStationId(Long departureStationId);
+
+    long countByReturnStationId(Long returnStationId);
+
 }
