@@ -9,17 +9,12 @@ Station and journey datasets are available [here](https://github.com/solita/dev-
 **Currect progress**
 
 Missing features include but are not limited to
-- string parameter validation in the controllers
 - performance optimization
-- displaying return journeys of a single station
 - displaying average distance of journeys for a single station
 - displaying top 5 departure and return stations for a single station
 - most tests
 
 Unfinished features include but are not limited to
-- toggling between departing and returning journeys of a single station
-- map placement in the single station view
-- appbar design and functionality
 - everything to do with the user interface
 
 Important to notice about commit history: project was rebased on May 12th due to a secret project.env file having eluded .gitignore limitations. Commit ebe2932 was originally made on April 11th.
@@ -63,7 +58,7 @@ POSTGRES_PASSWORD=[your password, same as above]
 POSTGRES_DB=database
 ```
 
-4. Copy all four dataset CSVs provided [here](https://github.com/solita/dev-academy-2023-exercise) to the root folder. Next:
+4. Copy all four dataset CSVs provided [here](https://github.com/solita/dev-academy-2023-exercise) to the src/main/docker folder. Next:
 
 **5. UNIX systems:**
 
