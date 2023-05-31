@@ -2,11 +2,11 @@
 **Work In Progress**
 This is a simple web application for viewing city bike journey information in the Helsinki capital area.
 
-The purpose of this project is to achieve personal learning goals when it comes to building full-stack web applications and as a pre-assignment for the 2023 Solita Dev Academy.
+The purpose of this project is to achieve personal learning goals when it comes to building full-stack web applications and as a pre-assignment for the 2023 Solita Dev Academy application.
 
 Station and journey datasets are available [here](https://github.com/solita/dev-academy-2023-exercise). The three CSVs containing journey information are stored in the "journeys" table of the database, and the city bike station dataset is stored in a table called "stations".
 
-**Currect progress**
+**Current progress**
 
 Missing features include but are not limited to
 - performance optimization
@@ -44,8 +44,9 @@ Before installing the project, please make sure your local machine has the follo
 **How to proceed**
 
 1. Clone the project repository from GitHub.
-2. Navigate to src/main/docker.
-3. Create a project.env file with the editor of your choice and enter the following:
+2. In the root directory, open `config-overrides.js` and replace root directory address on line 31 with your project root directory.
+3. Navigate to src/main/docker.
+4. Create a `project.env` file with the editor of your choice and enter the following:
 ```
 SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/database
 SPRING_DATASOURCE_USERNAME=[your username]
@@ -58,9 +59,9 @@ POSTGRES_PASSWORD=[your password, same as above]
 POSTGRES_DB=database
 ```
 
-4. Copy all four dataset CSVs provided [here](https://github.com/solita/dev-academy-2023-exercise) to the src/main/docker folder. Next:
+5. Copy all four dataset CSVs provided [here](https://github.com/solita/dev-academy-2023-exercise) to the src/main/docker folder. Next:
 
-**5. UNIX systems:**
+**6. UNIX systems:**
 
 1. Run `chmod -x ./rebuild.sh`
 
@@ -69,7 +70,7 @@ POSTGRES_DB=database
 3. Run `./rebuild.sh` to build and launch the project.
  
 
-**5. Windows:**
+**6. Windows:**
 
 1. Run `rename "Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv" "stations.csv"` 
 

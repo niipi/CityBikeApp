@@ -13,7 +13,7 @@ React.useEffect(()=> {
         fetch(`http://localhost:8080/journeys/all?${returningOrDeparting}StationId=${selectedStationId}`)
         .then((data) => data.json())
         .then((data) => setJourney(data))
-},[returningOrDeparting, paginationModel]);
+},[returningOrDeparting, selectedStationId, paginationModel]);
 
 const columns = [
   { field: 'journeyId', headerName: 'Journey ID', width: 100 },
