@@ -61,6 +61,24 @@ class JourneyControllerTest {
                 .andExpect(jsonPath("$.journeys[0].departureStationId", is(Integer.parseInt(Long.toString(expectedJourneys.get(0).getDepartureStationId())))));
     }
 
+    @Test
+    void shouldReturnStatusOKDespiteNegativePageParameter() throws Exception {
+        this.mockMvc
+                .perform(get("/journeys/all?page=-2"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andDo(print());
+    }
+
+    @Test
+    void shouldReturnStatusOKDespiteTooLargePageParameter() throws Exception {
+        this.mockMvc
+                .perform(get("/journeys/all?page=102"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andDo(print());
+    }
+
     @AfterEach
     void emptyRepository() {
         repository.deleteAll();

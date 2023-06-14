@@ -22,6 +22,8 @@ public class JourneyController {
     @Autowired
     private JourneyRepository repository;
 
+    private ControllerParameterValidation validation = new ControllerParameterValidation();
+
     public JourneyController(JourneyRepository repository) {
         this.repository = repository;
     }
@@ -41,8 +43,8 @@ public class JourneyController {
                 LOG.debug("/journeys/all has been called. Parametres: " + departureStationId + returnStationId);
             }
             List<Journey> journeys = new ArrayList<Journey>();
-            page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
-            size = makeGivenParameterAcceptable(size);
+            page = validation.makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
+            size = validation.makeGivenParameterAcceptable(size);
 
             Pageable pageable = PageRequest.of(page, size);
             Page<Journey> journeyPage;
@@ -68,7 +70,7 @@ public class JourneyController {
         } catch (Exception e) {
             LOG.error("An exception occurred.", e);
             Map<String, Object> emptyResponse = new HashMap<String, Object>();
-            return ResponseEntity.ok()
+            return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(emptyResponse);
         }
@@ -97,28 +99,9 @@ public class JourneyController {
         } catch (Exception e) {
             LOG.error("An exeption occurred.", e);
             Map<String, Long> emptyResponse = new HashMap<String, Long>();
-            return ResponseEntity.ok()
+            return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(emptyResponse);
         }
     }
-
-    private int makeGivenParameterAcceptable(int parameter) {
-        return makeGivenParameterAcceptable(parameter, 100);
-    }
-
-    private int makeGivenParameterAcceptable(int parameter, int maxValue) {
-        int acceptableParameter;
-        if (parameter < 0) {
-            acceptableParameter = 0;
-        }
-        else if (parameter > maxValue) {
-            acceptableParameter = 100;
-        }
-        else {
-            acceptableParameter = parameter;
-        }
-        return acceptableParameter;
-    }
-
 }

@@ -48,7 +48,7 @@ class StationControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(new StationController(repository)).build();
     }
 
-    /** Compares values from test station repository get response to expected values. **/
+    // Compares values from test station repository get response to expected values.
     @Test
     void shouldReturnAllStationsAsJSON() throws Exception {
         ArrayList<Station> expectedStations = new ArrayList<>();
@@ -64,6 +64,17 @@ class StationControllerTest {
                 .andExpect(jsonPath("$.totalPages", is(expectedTotalPages)))
                 .andExpect(jsonPath("$.stations[0].stationId", is(expectedStations.get(0).getStationId())))
                 .andExpect(jsonPath("$.stations[1].stationId", is(expectedStations.get(1).getStationId())));
+    }
+
+    // Check if illegal character in request parameter triggers bad request response.
+    @Test
+    void shouldReturnEmptyJSON() throws Exception {
+        this.mockMvc
+                .perform(get("/stations/all?name=IllegalCharacter*"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(content().json("{}"));
     }
 
     @AfterEach

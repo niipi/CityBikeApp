@@ -23,6 +23,8 @@ public class StationController {
     @Autowired
     private StationRepository repository;
 
+    private ControllerParameterValidation validation = new ControllerParameterValidation();
+
     public StationController(StationRepository repository) {
         this.repository = repository;
     }
@@ -44,23 +46,20 @@ public class StationController {
                 LOG.debug("/stations/all has been called. Parametres: " + stationName + stationAddress);
             }
             List<Station> stations = new ArrayList<Station>();
-            page = makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
-            size = makeGivenParameterAcceptable(size);
+            page = validation.makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
+            size = validation.makeGivenParameterAcceptable(size);
             Pageable pageable = PageRequest.of(page, size);
             Page<Station> stationPage;
 
             if (stationName == null && stationAddress == null) {
                 stationPage = repository.findAll(pageable);
-            }
-            else if (stationName == null && stationAddress != null) {
-                stringParameterIsValid("stationAddress", stationAddress);
+            } else if (stationName == null && stationAddress != null) {
+                validation.isStringParameterValid("stationAddress", stationAddress);
                 stationPage = repository.findByStationAddress(stationAddress, pageable);
-            }
-            else if (stationAddress == null && stationName != null) {
-                stringParameterIsValid("stationName", stationName);
+            } else if (stationAddress == null && stationName != null) {
+                validation.isStringParameterValid("stationName", stationName);
                 stationPage = repository.findByStationName(stationName, pageable);
-            }
-            else {
+            } else {
                 stationPage = repository.findByStationNameAndStationAddress(stationName, stationAddress, pageable);
             }
             stations = stationPage.getContent();
@@ -73,35 +72,9 @@ public class StationController {
         } catch (Exception e) {
             LOG.error("An exception occurred.", e);
             Map<String, Object> emptyResponse = new HashMap<String, Object>();
-            return ResponseEntity.ok()
+            return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(emptyResponse);
-        }
-    }
-
-    private int makeGivenParameterAcceptable(int parameter) {
-        return makeGivenParameterAcceptable(parameter, 100);
-    }
-
-    private int makeGivenParameterAcceptable(int parameter, int maxValue) {
-        int acceptableParameter;
-        if (parameter < 0) {
-            acceptableParameter = 0;
-        }
-        else if (parameter > maxValue) {
-            acceptableParameter = 100;
-        }
-        else {
-            acceptableParameter = parameter;
-        }
-        return acceptableParameter;
-    }
-
-    private void stringParameterIsValid(String parameterName, String parameterValue) {
-        // Acceptable string patterns contain alphanumeric characters, - and parentheses, and are between 1-256 characters long
-        String pattern = "^[a-zA-Z0-9() åäöÅÄÖ-]{1,255}$";
-        if (!parameterValue.matches(pattern)) {
-            throw new InvalidParameterException("Invalid parameter for station request was given: " + parameterName + " = " + parameterValue);
         }
     }
 }
