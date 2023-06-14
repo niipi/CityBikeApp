@@ -17,7 +17,7 @@ import java.util.*;
 @RequestMapping("/journeys")
 public class JourneyController {
 
-    private final static Logger LOG = LoggerFactory.getLogger(JourneyController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JourneyController.class);
 
     @Autowired
     private JourneyRepository repository;
@@ -40,9 +40,9 @@ public class JourneyController {
             int size) {
         try {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("/journeys/all has been called. Parametres: " + departureStationId + returnStationId);
+                LOG.debug("/journeys/all has been called. Parametres: {}, {}", departureStationId, returnStationId);
             }
-            List<Journey> journeys = new ArrayList<Journey>();
+            List<Journey> journeys;
             page = validation.makeGivenParameterAcceptable(page, Integer.MAX_VALUE);
             size = validation.makeGivenParameterAcceptable(size);
 
@@ -61,7 +61,7 @@ public class JourneyController {
                 journeyPage = repository.findAll(pageable);
             }
             journeys = journeyPage.getContent();
-            Map<String, Object> response = new HashMap<String, Object>();
+            Map<String, Object> response = new HashMap<>();
             response.put("journeys", journeys);
             response.put("totalPages", journeyPage.getTotalPages());
             return ResponseEntity.ok()
@@ -69,7 +69,7 @@ public class JourneyController {
                     .body(response);
         } catch (Exception e) {
             LOG.error("An exception occurred.", e);
-            Map<String, Object> emptyResponse = new HashMap<String, Object>();
+            Map<String, Object> emptyResponse = new HashMap<>();
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(emptyResponse);
@@ -98,7 +98,7 @@ public class JourneyController {
                     .body(response);
         } catch (Exception e) {
             LOG.error("An exeption occurred.", e);
-            Map<String, Long> emptyResponse = new HashMap<String, Long>();
+            Map<String, Long> emptyResponse = new HashMap<>();
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(emptyResponse);

@@ -8,9 +8,8 @@ function SingleStationPage(station) {
 
     // Props for Map component
     const coords = {
-        // Longitude and latitude were mixed up by developer, to be fixed
-        latitude: selection.longitude,
-        longitude: selection.latitude
+        latitude: selection.latitude,
+        longitude: selection.longitude
     };
 
     // Fetch journey counts from backend

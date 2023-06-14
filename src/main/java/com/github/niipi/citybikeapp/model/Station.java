@@ -27,16 +27,16 @@ public class Station {
     private Integer capacity;
 
    @Column(name = "x")
-   private double latitude;
+   private double longitude;
 
    @Column(name = "y")
-   private double longitude;
+   private double latitude;
 
    public Station() {
        // empty constructor
    }
 
-   public Station(int stationId, String stationName, String stationAddress, String stationCity, String serviceProvider, Integer capacity, double latitude, double longitude) {
+   public Station(int stationId, String stationName, String stationAddress, String stationCity, String serviceProvider, Integer capacity, double longitude, double latitude) {
        this.stationId = stationId;
        this.stationName = stationName;
        this.stationAddress = stationAddress;
@@ -48,8 +48,8 @@ public class Station {
        else {
            this.capacity = 0;
        }
-       this.latitude = latitude;
        this.longitude = longitude;
+       this.latitude = latitude;
    }
 
     public int getStationId() {
