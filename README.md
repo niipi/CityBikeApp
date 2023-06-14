@@ -36,42 +36,13 @@ React was chosen due to its popularity and to get better acquainted with JavaScr
 **Prerequisites**
 
 Before installing the project, please make sure your local machine has the following dependencies installed:
-- Java 20
-- Maven 3.9.1
 - Docker 23.0.5
 - Docker Compose 2.17.3
 
 **How to proceed**
 
 1. Clone the project repository from GitHub.
-2. In the root directory, open `config-overrides.js` and replace root directory address on line 31 with your project root directory.
-3. Navigate to src/main/docker.
-4. Create a `project.env` file with the editor of your choice and enter the following:
-```
-SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/database
-SPRING_DATASOURCE_USERNAME=[your username]
-SPRING_DATASOURCE_PASSWORD=[your password]
-SPRING_JPA_HIBERNATE_DDL_AUTO=update
+2. Navigate to the root folder.
+3. Run `docker compose up`
 
-# Database configuration for PostgreSQL (running in container called "city-bike-db")
-POSTGRES_USER=[your username, same as above]
-POSTGRES_PASSWORD=[your password, same as above]
-POSTGRES_DB=database
-```
-
-5. Copy all four dataset CSVs provided [here](https://github.com/solita/dev-academy-2023-exercise) to the src/main/docker folder. Next:
-
-**6. UNIX systems:**
-
-1. Run `chmod -x ./rebuild.sh`
-
-2. Run `mv Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv stations.csv`
-
-3. Run `./rebuild.sh` to build and launch the project.
- 
-
-**6. Windows:**
-
-1. Run `rename "Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv" "stations.csv"` 
-
-2. Run `rebuild.bat` to build and launch the project.
+The database credentials included in `src/main/docker/project.env` are for testing purposes only. Please replace them with your own credentials if you plan to deploy this project.

@@ -27,6 +27,7 @@ public class StationController {
         this.repository = repository;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/all")
     public ResponseEntity<Map<String, Object>> getAllStations(
             @RequestParam(value = "name", required = false)

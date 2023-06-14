@@ -93,8 +93,8 @@
 				<configuration>
 					<nodeVersion>${node.version}</nodeVersion>
 					<yarnVersion>${yarn.version}</yarnVersion>
-					<workingDirectory>${frontend-src-dir}</workingDirectory>
-					<installDirectory>${project.build.directory}</installDirectory>
+					<workingDirectory>src/main/js</workingDirectory>
+					<installDirectory>target</installDirectory>
 					<arguments>--env.production=false</arguments>
 				</configuration>
 

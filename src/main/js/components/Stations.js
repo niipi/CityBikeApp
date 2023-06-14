@@ -10,7 +10,7 @@ export default function StationDataGrid({onRowSelect}) {
     }); 
 
 React.useEffect(()=> {
-        fetch(`http://localhost:8080/stations/all?page=${paginationModel.page}`)
+        fetch(`/stations/all?page=${paginationModel.page}`)
         .then((data) => data.json())
         .then((data) => setStation(data))
 },[paginationModel]);

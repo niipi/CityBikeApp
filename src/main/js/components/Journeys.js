@@ -10,7 +10,7 @@ export default function JourneyDataGrid({returningOrDeparting, selectedStationId
     });
 
 React.useEffect(()=> {
-        fetch(`http://localhost:8080/journeys/all?${returningOrDeparting}StationId=${selectedStationId}`)
+        fetch(`/journeys/all?${returningOrDeparting}StationId=${selectedStationId}`)
         .then((data) => data.json())
         .then((data) => setJourney(data))
 },[returningOrDeparting, selectedStationId, paginationModel]);

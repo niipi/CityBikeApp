@@ -18,13 +18,13 @@ function SingleStationPage(station) {
     const [returnJourneyCount, setReturnJourneyCount] = React.useState(0);
 
     React.useEffect(() => {
-        fetch(`http://localhost:8080/journeys/count?departureStationId=${selection.stationId}`)
+        fetch(`/journeys/count?departureStationId=${selection.stationId}`)
         .then((data) => data.json())
         .then((data) => setDepartureJourneyCount(data));
     }, [selection.stationId]);
 
     React.useEffect(() => {
-        fetch(`http://localhost:8080/journeys/count?returnStationId=${selection.stationId}`)
+        fetch(`/journeys/count?returnStationId=${selection.stationId}`)
         .then((data) => data.json())
         .then((data) => setReturnJourneyCount(data));
     }, [selection.stationId]);

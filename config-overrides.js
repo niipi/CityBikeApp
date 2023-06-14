@@ -28,7 +28,7 @@ module.exports = {
     		// use this to check original config:
     		// console.log(config)
 
-    		config.rootDir = '/Users/npiiroinen/Documents/Apps/Solita2023/CityBikeApp'
+    		config.rootDir = '.'
     		config.roots = [
     			'<rootDir>/src/main/js',
     			'<rootDir>/src/test/js'
@@ -36,6 +36,7 @@ module.exports = {
     		config.setupFilesAfterEnv = [
     			'<rootDir>/src/test/js/setupTests.js'
     		]
+
     		// config.modulePaths = [ ]
 
     		return config;

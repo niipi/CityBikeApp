@@ -7,7 +7,6 @@ out/
 /src/main/docker/data/**
 target/
 *.iml
-*.sh
 yarn.lock
 
 ### Eclipse ###
