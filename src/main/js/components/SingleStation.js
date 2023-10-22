@@ -5,7 +5,7 @@ import Map from "./Map";
 
 function SingleStationPage(station) {
     const selection = station.station;
-
+    
     // Props for Map component
     const coords = {
         latitude: selection.latitude,

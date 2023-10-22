@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 
 /** Class for generating station objects based on information from the PostGreSQL database table "stations". **/
 @Entity
-@Table(name = "stations")
+@Table(name = "stations", indexes = {
+        @Index(name="nimi", columnList = "nimi")
+})
 public class Station {
 
     @Id
@@ -27,10 +29,10 @@ public class Station {
     private Integer capacity;
 
    @Column(name = "x")
-   private double longitude;
+   private double latitude;
 
    @Column(name = "y")
-   private double latitude;
+   private double longitude;
 
    public Station() {
        // empty constructor
