@@ -28,10 +28,10 @@ public class Station {
     @Column(name = "kapasiteetti")
     private Integer capacity;
 
-   @Column(name = "x")
+   @Column(name = "y")
    private double latitude;
 
-   @Column(name = "y")
+   @Column(name = "x")
    private double longitude;
 
    public Station() {
